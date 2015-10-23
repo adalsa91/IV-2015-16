@@ -92,6 +92,125 @@ He activado el entorno virtual con la orden **~/.nvm/nvm.sh** y he procedido a p
 
 ![version011](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/node011_zpshkp8wjeg.png)
 
-En el caso de Python he definido para **virtualenv** la ruta para que use **Python3** mediante el comando **virtualenv --python=/usr/bin/python3 nombre**,  puede verse en la carpeta **/bin** como esta la version 3 para usarse pero al arrancar el servidor da un error en la importación de un modulo de django.
+En el caso de Python he definido para **virtualenv** la ruta para que use **Python3** mediante el comando **virtualenv --python=/usr/bin/python3 nombre**,  puede verse en la carpeta **/bin** como esta la version 3 para usarse pero al arrancar el servidor da un error en la importación de un modulo de django que posiblemente sea causado por ser la version 1.5 y por tanto no use diche versión.
 
 ![python3](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/errorpython3_zpsig2cbyi7.png)
+
+###Ejercicio 4: Crear una descripción del módulo usando package.json. En caso de que se trate de otro lenguaje, usar el método correspondiente.
+
+Usando el comando **npm init** se crea el archivo **package.json** como puede verse en la figura.
+
+![package](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/ejerc4_zps7adcvb89.png)
+
+En el caso de **django** lo mas parecido que he encontrado es el archivo **settings.py** donde se encuentra el nombre de la aplicación, tipo de base de datos usada, etc.
+
+![django](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/django_zpsq2vd3ksl.png)
+
+###Ejercicio 5: Automatizar con grunt y docco (o algún otro sistema) la generación de documentación de la librería que se cree. Previamente, por supuesto, habrá que documentar tal librería.
+
+- El primer paso es instalar grunt mediante el comando **sudo npm install -g grunt-cli**, esto lo instala en el sistema de manera global.
+
+![instalargrunt](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/instalargrunt_zpssirlemwc.png)
+
+- El segundo paso es situarse en la carpeta raiz del proyecto e instalar docco mediante el comando **npm install docco grunt-docco --save-dev** .
+
+![instalardocco](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/instalardocco_zpsqskvoai3.png)
+
+- Se refleja en el archivo **package.json** la configuración relativa a dicha herramienta.
+
+```
+{
+  "name": "empresa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "jade": "~1.3.0"
+  },
+  "description": "Ejercicio_de_iv",
+  "main": "app.js",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-docco": "~0.4.0",
+    "docco": "~0.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javiergarridomellado/Empresa_expressiv.git"
+  },
+  "author": "Javier Garrido",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/javiergarridomellado/Empresa_expressiv/issues"
+  }
+}
+```
+
+- A continuación se crea en la carpeta raiz del proyecto el archivo **Gruntfile.js** con la siguiente configuración:
+
+```
+'use strict';
+
+module.exports = function(grunt) {
+
+  // Configuración del proyecto
+  grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
+  docco: {
+	  debug: {
+	  src: ['*.js'],
+	  options: {
+		  output: 'docs/'
+	  }
+	  }
+  }
+  });
+
+  // Carga el plugin de grunt para hacer esto
+  grunt.loadNpmTasks('grunt-docco');
+
+  // Tarea por omisión: generar la documentación
+  grunt.registerTask('default', ['docco']);
+};
+```
+
+- Por ultimo se ejectuta el comando **grunt** y se crea la [documentacion](https://github.com/javiergarridomellado/Empresa_expressiv/tree/master/empresa/docs) correspondiente.
+
+![ejecucion](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/docugrunt_zps2pyimugi.png)
+
+![doc](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/docu_zpsu1ujcl2k.png)
+
+He probado la herramienta para mi proyecto de Python, en este caso **Sphinx** para generar la documentación correspondiente.
+
+- Se instala con el comando **sudo easy_install -U sphinx**.
+
+![instalar](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/instalarsphinx_zpsq8a1zano.png)
+
+- Se crean las carpetas correspondientes ejecutando **sphinx-quickstart** tras responder una serie de preguntas.
+
+![carpetadoc](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/quicstart_zpsmm3qlwmb.png)
+
+- Se crean archivos **rst** por cada uno de los paquetes que se quiere documentar ejecutando **sphinx-apidoc -o docs .**
+
+![otrosrst](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/apidoc_zpslvopncvy.png)
+
+- Se edita el archivo **index** que se encuentra en la carpeta **source** y se ejecuta el comando **make html**
+
+![makefile](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/makehtml_zpsam6frmnv.png)
+
+- Puede verse en la carpeta **build** que se genera los **html** correspondientes a la documentación.
+
+![carpetadoc](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/htmlgenerados_zpsdfqh1y2b.png)
+
+![docenlaweb](http://i1045.photobucket.com/albums/b457/Francisco_Javier_G_M/documentacionempresa_zpsefndyimq.png)
+
+Puede seguirse el siguiente [enlace](https://www.ibm.com/developerworks/ssa/opensource/library/os-sphinx-documentation/) para realizar lo mismo. Mi documentación del ejercicio de Django puede [visitarse](https://github.com/javiergarridomellado/Empresa_django/tree/master/Empresas/docs).
+
