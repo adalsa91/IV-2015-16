@@ -37,7 +37,7 @@
 - [X] Revisar algún ejercicio de un compañero y sugerir cambios o mejoras. Se puede hacer, de la misma forma, mediante un pull request, en este caso al repo del compañero.
 - [X] Auto-corregir los ejercicios de esta forma, comprobando que están correctos.
 
-##Semana del 7 de octubre al 14 de octubre (3ª semana)
+##Sesión 3 (Semana del 7 de octubre al 14 de octubre)
 ###Objetivos de la semana
 - [X] Entender el concepto de DevOps y cómo se traduce al ciclo de vida de una aplicación.
 
@@ -59,3 +59,37 @@
 - [X] Instalar las herramientas necesarias para crear y aplicar tests en un proyecto.
 
 - [X] Comprender el papel de las build tools o herramientas de automatización.
+
+##Sesión 4 (Semana del 14 de octubre al 21 de octubre)
+
+###Objetivos de la semana
+
+- [x] Terminar la configuración de los sistemas de integración continua
+
+- [x] Comprender el nivel plataforma de la infraestructura virtual y su uso en prueba y producción.
+
+###Otros objetivos
+
+- [x] Antes de la clase de "teoría" se debería haber entregado el primer hito del proyecto.
+
+- [ ] Configurar los toolbelt de diferentes sistemas PaaS tales como BlueMix, Heroku u OpenShift.
+
+- [x] Comprender los mecanismos de despliegue automático.
+
+- [ ] Entender el formato YAML y su uso en diferentes infraestructuras virtuales. 
+
+##Tema 2
+
+###Cubre los siguientes objetivos de la asignatura
+
+- [x] Conocer los conceptos relacionados con el proceso de virtualización tanto de software como de hardware y ponerlos en práctica.
+
+
+###Objetivos específicos
+
+- [x] Entender el concepto de DevOps.
+
+- [x] Usar herramientas para gestión de los ciclos de desarrollo de una aplicación y entender cuales son estos.
+
+- [x] Aprender a usar integración continua en cualquier aplicación
+
